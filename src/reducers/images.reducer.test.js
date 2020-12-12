@@ -1,12 +1,12 @@
 import {
-    addNextImagesToCurrentList,
-    nextImage,
-    previousImage,
     setImagesList,
     setNextImages,
+    addNextImagesToCurrentList,
     toggleSingleView,
     updateCurrentImage,
-} from '../actions/images.actions';
+    nextImage,
+    previousImage,
+} from '../messages/images.messages';
 import { imageDisplayReducer, initialState } from './images.reducer';
 
 const testState = {

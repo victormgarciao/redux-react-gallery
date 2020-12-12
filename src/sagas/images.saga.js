@@ -1,19 +1,22 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import {
-    addNextImagesToCurrentList,
-    IMAGE_CLICKED,
-    MORE_IMAGES_CLICKED,
-    nextImage,
-    NEXT_IMAGE_CLICKED,
-    previousImage,
-    PREVIOUS_IMAGE_CLICKED,
+    A_IMAGE_CLICKED,
+    A_MORE_IMAGES_CLICKED,
+    A_NEXT_IMAGE_CLICKED,
+    A_PREVIOUS_IMAGE_CLICKED,
+    A_TOGGLE_SINGLE_VIEW_CLICKED,
+    A_USER_FETCH_REQUESTED,
+} from '../actions/images.actions';
+import {
     setImagesList,
     setNextImages,
+    addNextImagesToCurrentList,
     toggleSingleView,
     updateCurrentImage,
     updateCurrentImagePosition,
-    USER_FETCH_REQUESTED,
-} from '../actions/images.actions';
+    previousImage,
+    nextImage,
+} from '../messages/images.messages';
 import { IMAGE_LIMIT_PER_LOAD } from '../reducers/images.reducer';
 import { giphyFetch } from "../utils/giphy/giphy.utils";
 
@@ -76,10 +79,16 @@ function* clickOnPrevious(action) {
 };
 
 
+function* clickOnToggle() {
+    yield put(toggleSingleView())
+}
+
+
 export function* imageSaga() {
-    yield takeEvery(USER_FETCH_REQUESTED, loadImages);
-    yield takeEvery(MORE_IMAGES_CLICKED, loadMoreImages);
-    yield takeEvery(IMAGE_CLICKED, clickOnImage);
-    yield takeEvery(NEXT_IMAGE_CLICKED, clickOnNext);
-    yield takeEvery(PREVIOUS_IMAGE_CLICKED, clickOnPrevious);
+    yield takeEvery(A_USER_FETCH_REQUESTED, loadImages);
+    yield takeEvery(A_MORE_IMAGES_CLICKED, loadMoreImages);
+    yield takeEvery(A_IMAGE_CLICKED, clickOnImage);
+    yield takeEvery(A_NEXT_IMAGE_CLICKED, clickOnNext);
+    yield takeEvery(A_PREVIOUS_IMAGE_CLICKED, clickOnPrevious);
+    yield takeEvery(A_TOGGLE_SINGLE_VIEW_CLICKED, clickOnToggle);
 };

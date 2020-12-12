@@ -4,7 +4,7 @@ import {
     loadImages,
     getMoreImages,
     imageClicked,
-    toggleSingleView,
+    toggleSingleViewClicked,
     nextImageClicked,
     previousImageClicked,
 } from '../actions/images.actions';
@@ -40,7 +40,7 @@ function matchDispatchToProps(dispatch) {
             loadImages,
             getMoreImages,
             imageClicked,
-            toggleSingleView,
+            toggleSingleViewClicked,
             nextImageClicked,
             previousImageClicked,
         },

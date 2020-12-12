@@ -6,7 +6,7 @@ import { setImagesPropsTo } from "../../../hoc/images.hoc";
 function ImageActionsContainer(props) {
     const {
         currentImagePosition,
-        toggleSingleView,
+        toggleSingleViewClicked,
         imagesList,
         nextImageClicked,
         previousImageClicked,
@@ -40,7 +40,7 @@ function ImageActionsContainer(props) {
                 {'<<'}
             </Button>
             <Button
-                onClick={toggleSingleView}
+                onClick={toggleSingleViewClicked}
                 variant={buttonVariant.RED}
             >
                 {'X'}

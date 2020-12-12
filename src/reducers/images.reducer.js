@@ -1,13 +1,13 @@
 import {
-    IMAGES_FETCH_SUCCEEDED,
-    NEXT_IMAGES_FETCH_SUCCEEDED,
-    ADD_NEXT_IMAGES_TO_CURRENT_LIST,
-    TOGGLE_SINGLE_VIEW,
-    UPDATE_CURRENT_IMAGE,
-    UPDATE_CURRENT_IMAGE_POSITION,
-    NEXT_IMAGE,
-    PREVIOUS_IMAGE,
-} from "../actions/images.actions";
+    M_IMAGES_FETCH_SUCCEEDED,
+    M_NEXT_IMAGES_FETCH_SUCCEEDED,
+    M_ADD_NEXT_IMAGES_TO_CURRENT_LIST,
+    M_TOGGLE_SINGLE_VIEW,
+    M_UPDATE_CURRENT_IMAGE,
+    M_UPDATE_CURRENT_IMAGE_POSITION,
+    M_NEXT_IMAGE,
+    M_PREVIOUS_IMAGE,
+} from "../messages/images.messages";
 
 export const IMAGE_LIMIT_PER_LOAD = 15;
 
@@ -41,7 +41,7 @@ export function imageDisplayReducer (state = initialState, action = {}) {
 
 
     switch(actionType) {
-        case IMAGES_FETCH_SUCCEEDED: {
+        case M_IMAGES_FETCH_SUCCEEDED: {
             const { imagesList } = payload;
 
             return {
@@ -53,7 +53,7 @@ export function imageDisplayReducer (state = initialState, action = {}) {
         }
 
 
-        case NEXT_IMAGES_FETCH_SUCCEEDED: {
+        case M_NEXT_IMAGES_FETCH_SUCCEEDED: {
             const { nextImages } = payload;
 
             return {
@@ -64,7 +64,7 @@ export function imageDisplayReducer (state = initialState, action = {}) {
         }
 
 
-        case ADD_NEXT_IMAGES_TO_CURRENT_LIST: {
+        case M_ADD_NEXT_IMAGES_TO_CURRENT_LIST: {
             return {
                 ...state,
                 imagesList: [...state.imagesList, ...state.nextImages]
@@ -72,7 +72,7 @@ export function imageDisplayReducer (state = initialState, action = {}) {
         }
 
 
-        case TOGGLE_SINGLE_VIEW: {
+        case M_TOGGLE_SINGLE_VIEW: {
             return {
                 ...state,
                 isSingleViewOpen: !state.isSingleViewOpen,
@@ -80,7 +80,7 @@ export function imageDisplayReducer (state = initialState, action = {}) {
         }
 
 
-        case UPDATE_CURRENT_IMAGE: {
+        case M_UPDATE_CURRENT_IMAGE: {
             const { id } = payload;
 
             return {
@@ -90,7 +90,7 @@ export function imageDisplayReducer (state = initialState, action = {}) {
         }
 
 
-        case UPDATE_CURRENT_IMAGE_POSITION: {
+        case M_UPDATE_CURRENT_IMAGE_POSITION: {
             const { id } = payload;
 
             return {
@@ -100,7 +100,7 @@ export function imageDisplayReducer (state = initialState, action = {}) {
         }
 
 
-        case NEXT_IMAGE: {
+        case M_NEXT_IMAGE: {
             const { imagesList } = state;
             const { position } = payload;
 
@@ -112,7 +112,7 @@ export function imageDisplayReducer (state = initialState, action = {}) {
         }
 
 
-        case PREVIOUS_IMAGE: {
+        case M_PREVIOUS_IMAGE: {
             const { imagesList } = state;
             const { position } = payload;
             const isOutOfBounds = position < 0;
