@@ -7,7 +7,7 @@ import {
     toggleSingleView,
     nextImageClicked,
     previousImageClicked,
-} from '../actions/image-display.actions';
+} from '../actions/images.actions';
 
 
 function mapStateToProps(state) {

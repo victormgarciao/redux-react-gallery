@@ -13,7 +13,10 @@ function SingleViewContainer(props) {
         <>
             {
                 isSingleViewOpen && (
-                    <Wrapper variant={wrapperVariants.COLUMN_DIRECTION}>
+                    <Wrapper
+                        variant={wrapperVariants.COLUMN_DIRECTION}
+                        data-testid="single-view"
+                    >
                         <Wrapper><h3>{title}</h3></Wrapper>
                         <Wrapper variant={wrapperVariants.COLUMN_DIRECTION}>
                             <ImageWrapperContainer />

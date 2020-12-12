@@ -13,8 +13,8 @@ import {
     updateCurrentImage,
     updateCurrentImagePosition,
     USER_FETCH_REQUESTED,
-} from '../actions/image-display.actions';
-import { IMAGE_LIMIT_PER_LOAD } from '../reducers/image-display.reducer';
+} from '../actions/images.actions';
+import { IMAGE_LIMIT_PER_LOAD } from '../reducers/images.reducer';
 import { giphyFetch } from "../utils/giphy/giphy.utils";
 
 function* loadImages() {

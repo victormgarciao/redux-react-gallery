@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { imageDisplayReducer } from './image-display.reducer';
+import { imageDisplayReducer } from './images.reducer';
 
 
 export const allReducers = combineReducers({

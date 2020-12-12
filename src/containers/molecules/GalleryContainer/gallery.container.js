@@ -40,7 +40,7 @@ class Gallery extends Component {
         return !this.props.isSingleViewOpen
             ? (
                 <>
-                    <GalleryPicture>
+                    <GalleryPicture data-testid="gallery-picture">
                         {this.props.imagesList.map((imageData) => (
                             <PictureContainer
                                 id={imageData.id}
@@ -51,7 +51,11 @@ class Gallery extends Component {
                             />
                         ))}
                     </GalleryPicture>
-                    <Button onClick={this.handleClickMore} variant={buttonVariant.GREEN}>
+                    <Button
+                        onClick={this.handleClickMore}
+                        variant={buttonVariant.GREEN}
+                        data-testid="gallery-button"
+                    >
                         <span>More Gifs!!!!</span>
                     </Button>
                 </>

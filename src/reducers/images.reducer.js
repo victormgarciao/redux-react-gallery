@@ -7,11 +7,11 @@ import {
     UPDATE_CURRENT_IMAGE_POSITION,
     NEXT_IMAGE,
     PREVIOUS_IMAGE,
-} from "../actions/image-display.actions";
+} from "../actions/images.actions";
 
 export const IMAGE_LIMIT_PER_LOAD = 15;
 
-const initialState = {
+export const initialState = {
     imagesList: [],
     nextImages: [],
     nextOffset: 0,
@@ -33,7 +33,7 @@ const initialState = {
 };
 
 
-export function imageDisplayReducer (state = initialState, action) {
+export function imageDisplayReducer (state = initialState, action = {}) {
     const {
         type: actionType = {},
         payload,
