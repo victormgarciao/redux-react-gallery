@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { GalleryButton } from '../../../components/molecules/GalleryButton/galery-button';
-import { PictureWrapper } from '../../../components/molecules/PicturesWrapper/picture-wrapper';
+import { GalleryPicture } from '../../../components/atoms/PicturesWrapper/picture-wrapper';
 import { setImagesPropsTo } from '../../../hoc/images.hoc';
 import { PictureContainer } from '../../atoms/PictureContainer/picture.container';
+import { Button, buttonVariant } from '../../../components/atoms/Button/button';
 
 
 class Gallery extends Component {
@@ -40,7 +40,7 @@ class Gallery extends Component {
         return !this.props.isSingleViewOpen
             ? (
                 <>
-                    <PictureWrapper>
+                    <GalleryPicture>
                         {this.props.imagesList.map((imageData) => (
                             <PictureContainer
                                 id={imageData.id}
@@ -50,10 +50,10 @@ class Gallery extends Component {
                                 onClickImage={this.handleClickImage}
                             />
                         ))}
-                    </PictureWrapper>
-                    <GalleryButton onClick={this.handleClickMore}>
+                    </GalleryPicture>
+                    <Button onClick={this.handleClickMore} variant={buttonVariant.GREEN}>
                         <span>More Gifs!!!!</span>
-                    </GalleryButton>
+                    </Button>
                 </>
             )
             : null

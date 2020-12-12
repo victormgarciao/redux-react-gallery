@@ -2,9 +2,7 @@ import React from "react";
 import ImageWrapperContainer from "../../atoms/ImageWrapper/image-wrapper.container";
 import ImageActionsContainer from "../../atoms/ImageActions/image-actions.container";
 import { setImagesPropsTo } from "../../../hoc/images.hoc";
-import { ViewHandler } from "../../../components/molecules/viewHandler/view-handler";
-import { ImageDescription } from "../../../components/molecules/ImageDescription/image-description";
-import { SingleView } from "../../../components/molecules/SingleView/single-view";
+import { Wrapper, wrapperVariants } from "../../../components/atoms/Wrapper/wrapper";
 
 
 function SingleViewContainer(props) {
@@ -15,15 +13,13 @@ function SingleViewContainer(props) {
         <>
             {
                 isSingleViewOpen && (
-                    <SingleView>
-                        <ImageDescription>
-                            <h3>{title}</h3>
-                        </ImageDescription>
-                        <ViewHandler>
+                    <Wrapper variant={wrapperVariants.COLUMN_DIRECTION}>
+                        <Wrapper><h3>{title}</h3></Wrapper>
+                        <Wrapper variant={wrapperVariants.COLUMN_DIRECTION}>
                             <ImageWrapperContainer />
                             <ImageActionsContainer />
-                        </ViewHandler>
-                    </SingleView>
+                        </Wrapper>
+                    </Wrapper>
                 )
             }
         </>

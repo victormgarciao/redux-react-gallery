@@ -1,13 +1,22 @@
-import React from 'react';
+import styled from 'styled-components';
+import { variant } from 'styled-system';
 
-export function Wrapper(props) {
-    const { children, filling, style } = props;
-    return (
-        <div
-            className={`${filling}__wrapper`}
-            style={style}
-        >
-            {children}
-        </div>
-    );
-};
+export const wrapperVariants = {
+    'COLUMN_DIRECTION': 'columnDirection',
+}
+
+export const Wrapper = styled('div')(
+    {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: '10px',
+    },
+    variant({
+        variants: {
+            columnDirection: {
+                flexDirection: 'column',
+            },
+        }
+    })
+);

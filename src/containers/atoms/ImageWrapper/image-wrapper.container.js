@@ -1,4 +1,4 @@
-import { ImageWrapper } from "../../../components/molecules/ImageWrapper/image-wrapper";
+import { Wrapper } from "../../../components/atoms/Wrapper/wrapper";
 import { setImagesPropsTo } from "../../../hoc/images.hoc";
 
 function ImageWrapperContainer(props) {
@@ -16,7 +16,7 @@ function ImageWrapperContainer(props) {
     } = props;
 
     return (
-        <ImageWrapper>
+        <Wrapper>
             <img
                 src={source}
                 alt={title}
@@ -30,7 +30,7 @@ function ImageWrapperContainer(props) {
                     transition: 'all 300ms ease-in-out 0s',
                 }}
             />
-        </ImageWrapper>
+        </Wrapper>
     );
 };
 

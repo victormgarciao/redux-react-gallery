@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ImageHovered } from "../../../components/atoms/ImageHovered/image-hovered";
+import { GalleryPicture } from "../../../components/atoms/GalleryPicture/gallery.picture";
 
 export function PictureContainer(props) {
     const { id, title, onClickImage, images: { fixed_height } } = props;
@@ -14,12 +15,8 @@ export function PictureContainer(props) {
     }
 
     return (
-        <picture 
+        <GalleryPicture
             id={id}
-            style={{
-                position: 'relative',
-                margin: '10px',
-            }}
             onMouseEnter={handleIsHovered(true)}
             onMouseLeave={handleIsHovered(false)}
             onClick={onClickImage(id)}
@@ -32,6 +29,6 @@ export function PictureContainer(props) {
             >
                 {title}
             </ImageHovered>
-        </picture>
+        </GalleryPicture>
     );
 }
