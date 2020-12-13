@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const GalleryPicture = styled('div')(
+export const PictureWrapper = styled('div')(
     {
         maxWidth: '1024px',
         width: '80%',

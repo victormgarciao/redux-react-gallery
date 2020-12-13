@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GalleryPicture } from '../../../components/atoms/PicturesWrapper/picture-wrapper';
+import { PictureWrapper } from '../../../components/atoms/PicturesWrapper/picture-wrapper';
 import { setImagesPropsTo } from '../../../hoc/images.hoc';
 import { PictureContainer } from '../../atoms/PictureContainer/picture.container';
 import { Button, buttonVariant } from '../../../components/atoms/Button/button';
@@ -40,7 +40,7 @@ class Gallery extends Component {
         return !this.props.isSingleViewOpen
             ? (
                 <>
-                    <GalleryPicture data-testid="gallery-picture">
+                    <PictureWrapper data-testid="gallery-picture">
                         {this.props.imagesList.map((imageData) => (
                             <PictureContainer
                                 id={imageData.id}
@@ -50,7 +50,7 @@ class Gallery extends Component {
                                 onClickImage={this.handleClickImage}
                             />
                         ))}
-                    </GalleryPicture>
+                    </PictureWrapper>
                     <Button
                         onClick={this.handleClickMore}
                         variant={buttonVariant.GREEN}
