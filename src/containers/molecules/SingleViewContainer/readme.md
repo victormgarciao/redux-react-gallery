@@ -1,6 +1,6 @@
 # Single View Container
 
-This component is going to render a button
+This renders simple view
 
 ## Usage
 
