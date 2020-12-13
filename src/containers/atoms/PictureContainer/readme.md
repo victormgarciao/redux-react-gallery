@@ -5,7 +5,7 @@ It renders the space for the image in Single View
 ## Usage
 
 ```
-import Picture from 'src/containers/atoms/picture.containers';
+import { PictureContainer } from 'src/containers/atoms/picture.containers';
 ```
 
 ## Props
@@ -20,7 +20,7 @@ import Picture from 'src/containers/atoms/picture.containers';
 
 
 ```
-  <Picture
+  <PictureContainer
     id={'foo'}
     title={tit'foo'}
     onClickImage={() => foo}
