@@ -7,7 +7,7 @@ import {
     A_PREVIOUS_IMAGE_CLICKED,
     A_TOGGLE_SINGLE_VIEW_CLICKED,
     A_USER_FETCH_REQUESTED,
-} from '../actions/images.actions';
+} from '../../actions/images.actions';
 import {
     setImagesList,
     setNextImages,
@@ -18,8 +18,8 @@ import {
     nextImage,
     updateCurrentImage,
     updateNextOffset,
-} from '../messages/images.messages';
-import { IMAGE_LIMIT_PER_LOAD } from '../reducers/images.reducer';
+} from '../../messages/images.messages';
+import { IMAGE_LIMIT_PER_LOAD } from '../../reducers/images.reducer';
 
 export const giphyFetch = new GiphyFetch("Kd3FFn0gyReHBHmvN4SGfKKZVxN6YyQN");
 
