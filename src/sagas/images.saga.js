@@ -1,3 +1,4 @@
+import { GiphyFetch } from "@giphy/js-fetch-api";
 import { put, select, takeEvery } from 'redux-saga/effects'
 import {
     A_IMAGE_CLICKED,
@@ -19,7 +20,8 @@ import {
     updateNextOffset,
 } from '../messages/images.messages';
 import { IMAGE_LIMIT_PER_LOAD } from '../reducers/images.reducer';
-import { giphyFetch } from "../utils/giphy/giphy.utils";
+
+export const giphyFetch = new GiphyFetch("Kd3FFn0gyReHBHmvN4SGfKKZVxN6YyQN");
 
 const getNextOffset = (state) => state.images.nextOffset;
 const getImagesList = (state) => state.images.imagesList;
