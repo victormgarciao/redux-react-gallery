@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects'
+import { put, select, takeEvery } from 'redux-saga/effects'
 import {
     A_IMAGE_CLICKED,
     A_MORE_IMAGES_CLICKED,
@@ -12,20 +12,29 @@ import {
     setNextImages,
     addNextImagesToCurrentList,
     toggleSingleView,
-    updateCurrentImage,
     updateCurrentImagePosition,
     previousImage,
     nextImage,
+    updateCurrentImage,
+    updateNextOffset,
 } from '../messages/images.messages';
 import { IMAGE_LIMIT_PER_LOAD } from '../reducers/images.reducer';
 import { giphyFetch } from "../utils/giphy/giphy.utils";
+
+const getNextOffset = (state) => state.images.nextOffset;
+const getImagesList = (state) => state.images.imagesList;
+const getCurrentImagePosition = (state) => state.images.currentImagePosition;
 
 function* loadImages() {
     try {
         const { data: imagesList } = yield giphyFetch.trending({ offset: 0, limit: IMAGE_LIMIT_PER_LOAD});
         const { data: nextImages } = yield giphyFetch.trending({ offset: IMAGE_LIMIT_PER_LOAD, limit: IMAGE_LIMIT_PER_LOAD});
-        
+        const nextOffset = yield select(getNextOffset);
+        const imagesAlreadyLoaded = IMAGE_LIMIT_PER_LOAD * 2;
+
         yield put(setImagesList(imagesList));
+        yield put(updateNextOffset(nextOffset + imagesAlreadyLoaded));
+        yield put(updateCurrentImage(imagesList[0]));
         yield put(setNextImages(nextImages));
     } catch (e) {
         yield put({type: "USER_FETCH_FAILED", message: e.message});
@@ -33,13 +42,15 @@ function* loadImages() {
 };
 
 
-function* loadMoreImages(action) {
-    const { payload: { offset } } = action;
+function* loadMoreImages() {
+    const nextOffset = yield select(getNextOffset);
+    
     try {
-        const { data: nextImages } = yield giphyFetch.trending({ offset, limit: IMAGE_LIMIT_PER_LOAD});
+        const { data: nextImages } = yield giphyFetch.trending({ offset: nextOffset, limit: IMAGE_LIMIT_PER_LOAD});
 
         yield put(addNextImagesToCurrentList());
         yield put(setNextImages(nextImages));
+        yield put(updateNextOffset(nextOffset + IMAGE_LIMIT_PER_LOAD));
     } catch (e) {
         yield put({type: "LOAD_MORE_IMAGES_FAILED", message: e.message});
     }
@@ -48,34 +59,54 @@ function* loadMoreImages(action) {
 
 function* clickOnImage(action) {
     const { payload: { id } } = action;
+    const imagesList = yield select(getImagesList);
+    const newImageIndex = imagesList.findIndex((image) => image.id === id);
+    const newImage = imagesList[newImageIndex];
+
+
     yield put(toggleSingleView());
-    yield put(updateCurrentImage(id));
-    yield put(updateCurrentImagePosition(id));
+    yield put(updateCurrentImage(newImage));
+    yield put(updateCurrentImagePosition(newImageIndex));
 };
 
 
-function* clickOnNext(action) {
-    const { payload: { position, isLast, nextOffset } } = action;
+function* updateNextImage(imagesList, position) {
+    const newImage = imagesList[position];
+    yield put(updateCurrentImagePosition(position));
+    yield put(nextImage(newImage));
+}
+
+
+function* clickOnNext() {
+    const imagesList = yield select(getImagesList);
+    const currentImagePosition = yield select(getCurrentImagePosition);
+    const nextPosition = currentImagePosition + 1;
+    const isOutOfBounds = nextPosition === imagesList.length;
     
-    if (isLast) {
+    if (isOutOfBounds) {
         try {
-            const { data: nextImages } = yield giphyFetch.trending({ offset: nextOffset, limit: IMAGE_LIMIT_PER_LOAD});
-    
-            yield put(addNextImagesToCurrentList());
-            yield put(setNextImages(nextImages));
-            yield put(nextImage(position));
+            yield loadMoreImages();
+            const imageListAfterLoad = yield select(getImagesList);
+            yield updateNextImage(imageListAfterLoad, nextPosition);
         } catch (e) {
             yield put({type: "LOAD_MORE_IMAGES_FAILED", message: e.message});
         }
     } else {
-        yield put(nextImage(position));
+        yield updateNextImage(imagesList, nextPosition);
     }
 };
 
 
-function* clickOnPrevious(action) {
-    const { payload: { position } } = action;
-    yield put(previousImage(position));
+function* clickOnPrevious() {
+    const currentImagePosition = yield select(getCurrentImagePosition);
+    const previousPosition = currentImagePosition - 1;
+    const isNotOutOfBounds = previousPosition >= 0;
+    if (isNotOutOfBounds) {
+        yield put(updateCurrentImagePosition(previousPosition));
+        const imagesList = yield select(getImagesList);
+        const newImage = imagesList[previousPosition];
+        yield put(previousImage(newImage))
+    };
 };
 
 

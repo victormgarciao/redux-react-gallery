@@ -14,22 +14,14 @@ function mapStateToProps(state) {
     const {
         images: {
             imagesList,
-            nextImages,
-            gifPromise,
-            nextOffset,
             isSingleViewOpen,
-            currentImagePosition,
             currentImage,
         }
     } = state;
     
     return {
         imagesList,
-        nextImages,
-        gifPromise,
-        nextOffset,
         isSingleViewOpen,
-        currentImagePosition,
         currentImage,
     };
 };

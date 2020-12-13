@@ -1,12 +1,13 @@
 import {
     M_IMAGES_FETCH_SUCCEEDED,
-    M_NEXT_IMAGES_FETCH_SUCCEEDED,
+    M_SET_NEXT_IMAGES,
     M_ADD_NEXT_IMAGES_TO_CURRENT_LIST,
     M_TOGGLE_SINGLE_VIEW,
-    M_UPDATE_CURRENT_IMAGE,
     M_UPDATE_CURRENT_IMAGE_POSITION,
     M_NEXT_IMAGE,
     M_PREVIOUS_IMAGE,
+    M_UPDATE_CURRENT_IMAGE,
+    M_UPDATE_NEXT_OFFSET,
 } from "../messages/images.messages";
 
 export const IMAGE_LIMIT_PER_LOAD = 15;
@@ -16,7 +17,6 @@ export const initialState = {
     nextImages: [],
     nextOffset: 0,
     limit: IMAGE_LIMIT_PER_LOAD,
-    gifPromise: null,
 
     isSingleViewOpen: false,
     currentImagePosition: 0,
@@ -33,33 +33,51 @@ export const initialState = {
 };
 
 
-export function imageDisplayReducer (state = initialState, action = {}) {
+export function imageDisplayReducer (state = initialState, message = {}) {
     const {
-        type: actionType = {},
+        type: messageType = {},
         payload,
-    } = action;
+    } = message;
 
 
-    switch(actionType) {
+    switch(messageType) {
         case M_IMAGES_FETCH_SUCCEEDED: {
             const { imagesList } = payload;
 
             return {
                 ...state,
                 imagesList,
-                nextOffset: state.nextOffset + IMAGE_LIMIT_PER_LOAD,
-                currentImage: imagesList[0]
+            };
+        }
+
+        case M_PREVIOUS_IMAGE:
+        case M_NEXT_IMAGE:
+        case M_UPDATE_CURRENT_IMAGE: {
+            const { image } = payload;
+
+            return {
+                ...state,
+                currentImage: image,
             };
         }
 
 
-        case M_NEXT_IMAGES_FETCH_SUCCEEDED: {
+        case M_UPDATE_NEXT_OFFSET: {
+            const { offset } = payload;
+
+            return {
+                ...state,
+                nextOffset: offset,
+            };
+        }
+
+
+        case M_SET_NEXT_IMAGES: {
             const { nextImages } = payload;
 
             return {
                 ...state,
                 nextImages,
-                nextOffset: state.nextOffset + IMAGE_LIMIT_PER_LOAD,
             };
         }
 
@@ -80,50 +98,13 @@ export function imageDisplayReducer (state = initialState, action = {}) {
         }
 
 
-        case M_UPDATE_CURRENT_IMAGE: {
-            const { id } = payload;
-
-            return {
-                ...state,
-                currentImage: state.imagesList.find((image) => image.id === id),
-            }
-        }
-
-
         case M_UPDATE_CURRENT_IMAGE_POSITION: {
-            const { id } = payload;
-
-            return {
-                ...state,
-                currentImagePosition: state.imagesList.findIndex((image) => image.id === id),
-            }
-        }
-
-
-        case M_NEXT_IMAGE: {
-            const { imagesList } = state;
             const { position } = payload;
 
             return {
                 ...state,
                 currentImagePosition: position,
-                currentImage: imagesList[position],
             }
-        }
-
-
-        case M_PREVIOUS_IMAGE: {
-            const { imagesList } = state;
-            const { position } = payload;
-            const isOutOfBounds = position < 0;
-
-            return isOutOfBounds
-                ? state
-                : {
-                    ...state,
-                    currentImagePosition: position,
-                    currentImage: imagesList[position],
-                };
         }
 
 

@@ -24,7 +24,7 @@ class Gallery extends Component {
 
     handleClickMore(event) {
         event.preventDefault();
-        this.props.getMoreImages(this.props.nextOffset)
+        this.props.getMoreImages();
     }
     
     

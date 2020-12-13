@@ -14,7 +14,6 @@ const testState = {
     nextImages: [{id: 'tupi'}, {id: 'topi'}],
     nextOffset: 0,
     limit: 10,
-    gifPromise: null,
 
     isSingleViewOpen: false,
     currentImagePosition: 0,
@@ -36,106 +35,93 @@ describe('imageDisplayReducer', function() {
     });
 
 
-    test('return state with no action', function() {
+    test('return state with no message', function() {
         expect(imageDisplayReducer(testState)).toEqual(testState);
     });
 
 
-    test('return expected state aftert setImageList action', function() {
+    test('return expected state aftert setImageList message', function() {
         const testImageList = ['anotherBoo', 'anotherBar'];
         const expectedObject = {
             ...testState,
             imagesList: testImageList,
-            nextOffset: testState.nextOffset + 15,
-            currentImage: 'anotherBoo',
         };
-        const action = setImagesList(testImageList);
+        const message = setImagesList(testImageList);
 
-        expect(imageDisplayReducer(testState, action))
+        expect(imageDisplayReducer(testState, message))
             .toEqual(expectedObject);
     });
 
 
-    test('return expected state aftert setNextImages action', function() {
+    test('return expected state aftert setNextImages message', function() {
         const testImageList = ['anotherBoo', 'anotherBar'];
         const expectedObject = {
             ...testState,
             nextImages: testImageList,
-            nextOffset: testState.nextOffset + 15,
         };
-        const action = setNextImages(testImageList);
+        const message = setNextImages(testImageList);
 
-        expect(imageDisplayReducer(testState, action))
+        expect(imageDisplayReducer(testState, message))
             .toEqual(expectedObject);
     });
 
 
-    test('return expected state aftert addNextImagesToCurrentList action', function() {
+    test('return expected state aftert addNextImagesToCurrentList message', function() {
         const expectedObject = {
             ...testState,
             imagesList: [...testState.imagesList, ...testState.nextImages],
         };
-        const action = addNextImagesToCurrentList();
+        const message = addNextImagesToCurrentList();
 
-        expect(imageDisplayReducer(testState, action))
+        expect(imageDisplayReducer(testState, message))
             .toEqual(expectedObject);
     });
 
 
-    test('return expected state aftert toggleSingleView action', function() {
+    test('return expected state aftert toggleSingleView message', function() {
         const expectedObject = {
             ...testState,
             isSingleViewOpen: !testState.isSingleViewOpen,
         };
-        const action = toggleSingleView();
+        const message = toggleSingleView();
 
-        expect(imageDisplayReducer(testState, action))
+        expect(imageDisplayReducer(testState, message))
             .toEqual(expectedObject);
     });
 
 
-    test('return expected state aftert updateCurrentImage action', function() {
+    test('return expected state aftert updateCurrentImage message', function() {
         const expectedObject = {
             ...testState,
             currentImage: {id: 'bar'},
         };
-        const action = updateCurrentImage('bar');
+        const message = updateCurrentImage({id: 'bar'});
 
-        expect(imageDisplayReducer(testState, action))
+        expect(imageDisplayReducer(testState, message))
             .toEqual(expectedObject);
     });
 
 
-    test('return expected state aftert nextImage action', function() {
+    test('return expected state aftert nextImage message', function() {
         const expectedObject = {
             ...testState,
-            currentImagePosition: 1,
             currentImage: {id: 'bar'},
         };
-        const action = nextImage(1);
+        const message = nextImage({id: 'bar'});
 
-        expect(imageDisplayReducer(testState, action))
+        expect(imageDisplayReducer(testState, message))
             .toEqual(expectedObject);
     });
 
 
-    test('return expected state aftert previousImage action', function() {
+    test('return expected state aftert previousImage message', function() {
         const expectedObject = {
             ...testState,
-            currentImagePosition: 1,
             currentImage: {id: 'bar'},
         };
-        const action = previousImage(1);
+        const message = previousImage({id: 'bar'});
 
-        expect(imageDisplayReducer(testState, action))
+        expect(imageDisplayReducer(testState, message))
             .toEqual(expectedObject);
-    });
-
-
-    test('state does not change if position is < 0', function() {
-        const action = previousImage(-1);
-
-        expect(imageDisplayReducer(testState, action))
-            .toEqual(testState);
     });
 });

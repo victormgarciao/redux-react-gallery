@@ -13,11 +13,8 @@ export function loadImages() {
 };
 
 
-export function getMoreImages(offset) {
-    return {
-        type: A_MORE_IMAGES_CLICKED,
-        payload: { offset }
-    }
+export function getMoreImages() {
+    return { type: A_MORE_IMAGES_CLICKED }
 };
 
 export function imageClicked(id) {
@@ -33,16 +30,10 @@ export function toggleSingleViewClicked() {
 };
 
 
-export function nextImageClicked({ position, isLast, nextOffset }) {
-    return {
-        type: A_NEXT_IMAGE_CLICKED,
-        payload: { position, isLast, nextOffset },
-    }
+export function nextImageClicked() {
+    return { type: A_NEXT_IMAGE_CLICKED }
 }
 
-export function previousImageClicked(position) {
-    return {
-        type: A_PREVIOUS_IMAGE_CLICKED,
-        payload: { position },
-    }
+export function previousImageClicked() {
+    return { type: A_PREVIOUS_IMAGE_CLICKED }
 }

@@ -5,36 +5,16 @@ import { setImagesPropsTo } from "../../../hoc/images.hoc";
 
 function ImageActionsContainer(props) {
     const {
-        currentImagePosition,
         toggleSingleViewClicked,
-        imagesList,
         nextImageClicked,
         previousImageClicked,
-        nextOffset,
     } = props;
-
-
-    function handleNextImage() {
-        const isLast = currentImagePosition === imagesList.length - 1;
-        const nextPosition = currentImagePosition + 1;
-        nextImageClicked({
-            position: nextPosition,
-            isLast,
-            nextOffset,
-        });
-    }
-
-
-    function handlePreviousImage() {
-        const previousPosition = currentImagePosition - 1;
-        previousImageClicked(previousPosition);
-    }
 
 
     return (
         <Wrapper>
             <Button
-                onClick={handlePreviousImage}
+                onClick={previousImageClicked}
                 variant={buttonVariant.GREEN}
             >
                 {'<<'}
@@ -46,7 +26,7 @@ function ImageActionsContainer(props) {
                 {'X'}
             </Button>
             <Button
-                onClick={handleNextImage}
+                onClick={nextImageClicked}
                 variant={buttonVariant.GREEN}
             >
                 {'>>'}
