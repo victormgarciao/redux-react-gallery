@@ -17,3 +17,7 @@ name_action(some_data);
 
 ...
 ```
+## Notes
+
+- Actions constants are allocated here too, their names should ber prefixed by A_ so an action should be named `A_SOME_ACTION`
+- By differntiating actions from users and actions from effects (messages) we can debug better and detect a bug's source faster
