@@ -21,7 +21,7 @@ import {
 } from '../../messages/images.messages';
 import { IMAGE_LIMIT_PER_LOAD } from '../../reducers/images.reducer';
 
-export const giphyFetch = new GiphyFetch("Kd3FFn0gyReHBHmvN4SGfKKZVxN6YyQN");
+const giphyFetch = new GiphyFetch("Kd3FFn0gyReHBHmvN4SGfKKZVxN6YyQN");
 
 const getNextOffset = (state) => state.images.nextOffset;
 const getImagesList = (state) => state.images.imagesList;
