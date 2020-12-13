@@ -1,3 +1,36 @@
+# REACT GALLERY
+
+- This is an application which fetch Gifs from the famous site Giphy throw its own API.
+- We will see a gallery with some of the most popular Gifs
+- We can load more Gifs just pressing at the button `More Gifs!!!`
+- We can select an image, and we will see the image in its original size
+    - Also you will be able to go to the next or previous one when it's possible
+    - You can close the Single Image View by pressing the close button with the big X
+- We have used these technologies:
+    - React
+    - Redux
+    - Sagas
+    - Webpack
+    - Jest
+    - Styled-Component
+    - Styled-System
+- We are loading some images behind the scenes (Asynchronuous load) so the user load is faster
+- Documentation:
+    - Each piece of this project is documented
+    - To see all the documentation you only have to browse to the folders of the application and you will find a readme with related information
+    - Some examples
+        - https://github.com/victormgarciao/redux-react-gallery/tree/master/src/reducers
+        - https://github.com/victormgarciao/redux-react-gallery/tree/master/src/components/atoms/Button
+        - https://github.com/victormgarciao/redux-react-gallery/tree/master/src/containers
+        - https://github.com/victormgarciao/redux-react-gallery/tree/master/src/sagas/Images
+- Tests
+    - There are some tests
+        - App.test.js
+        - src/reducers/images.reducer.test.js
+    - Room for improvement: MUCH, MUCH, MUCH Tests, but for the purpose of the project, maybe it's enough so far
+
+And now, lets keep original documentation in orden to get some info about the scripts
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
